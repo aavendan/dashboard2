@@ -1,9 +1,13 @@
+import { useState } from 'react';
 import { Grid } from '@mui/material';
 import HeaderUI from './components/HeaderUI';
 import AlertUI from './components/AlertUI';
+import SelectorUI from './components/SelectorUI';
 import './App.css'
 
 function App() {
+
+  const [citySelected, setCitySelected] = useState('');
 
   return (
     <Grid container spacing={5} sx={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -14,12 +18,19 @@ function App() {
       </Grid>
 
       {/* Alertas */}
-      <Grid container size={{ xs: 12, md: 12 }}  sx={{ justifyContent: 'flex-end', alignItems: 'center' }}>
+      <Grid container size={{ xs: 12, md: 12 }} sx={{ justifyContent: 'flex-end', alignItems: 'center' }}>
 
-                <AlertUI description="No se prevén lluvias" /></Grid>
+        <AlertUI description="No se prevén lluvias" /></Grid>
 
       {/* Selector */}
-      <Grid size={{ xs: 12, md: 3 }}>Elemento: Selector</Grid>
+      <Grid size={{ xs: 12, md: 3 }}>
+        {citySelected && (
+          <p>
+            Información del clima en <span style={{ textTransform: 'capitalize', fontWeight: 'bold' }}>{citySelected}</span>
+          </p>
+        )}
+        <SelectorUI setCitySelected={setCitySelected} />
+      </Grid>
 
       {/* Indicadores */}
       <Grid size={{ xs: 12, md: 9 }}>Elemento: Indicadores</Grid>
